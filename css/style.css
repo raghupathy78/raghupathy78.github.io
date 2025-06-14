@@ -1,0 +1,217 @@
+/* Custom Black Theme Styles */
+:root {
+    --bs-primary: #0d6efd;
+    --bs-dark: #121212;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 56px;
+    background-color: var(--bs-dark);
+    color: #f8f9fa;
+}
+
+.bg-black {
+    background-color: #000 !important;
+}
+
+/* Profile Image Styling */
+.profile-img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border: 5px solid var(--bs-primary);
+    box-shadow: 0 0 20px rgba(13, 110, 253, 0.3);
+    transition: transform 0.3s;
+}
+
+.profile-img:hover {
+    transform: scale(1.05);
+}
+
+/* Navigation Bar */
+.navbar {
+    transition: background-color 0.3s;
+}
+
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Section Titles */
+.section-title {
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 3px;
+    background: var(--bs-primary);
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Card Hover Effect */
+.card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Form Styling */
+.form-control {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    color: white !important;
+}
+
+.form-control:focus {
+    background-color: #1a1a1a;
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .profile-img {
+        width: 200px;
+        height: 200px;
+    }
+}
+/* Button Hover Animation */
+.btn-primary {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(13, 110, 253, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px);
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+.profile-img {
+  /* Existing styles */
+  transition: all 0.5s ease;
+}
+
+.profile-img:hover {
+  transform: scale(1.05) rotate(5deg);
+  box-shadow: 0 0 30px rgba(13, 110, 253, 0.5);
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .profile-img {
+        max-width: 250px;
+    }
+    
+    body {
+        padding-top: 60px;
+    }
+}
+
+.icon-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.back-to-top.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-5px);
+}
+
+/* Animations */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+    .hero {
+        text-align: center;
+        padding-top: 100px;
+    }
+    
+    .profile-img {
+        margin-top: 50px;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+}
