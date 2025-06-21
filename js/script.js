@@ -180,3 +180,68 @@ document.addEventListener('keydown', function(e) {
     alert('Viewing source is disabled');
   }
 });
+
+// Initialize typewriter on home section heading
+const homeHeading = document.querySelector('#home h1');
+if (homeHeading) {
+    const originalText = homeHeading.textContent;
+    homeHeading.textContent = ''; // Clear the text
+    typeWriter(homeHeading, originalText);
+}
+
+// Text Rotator Functionality
+class TextRotator {
+    constructor(element) {
+        this.element = element;
+        this.words = JSON.parse(element.getAttribute('data-rotate'));
+        this.currentWordIndex = 0;
+        this.isDeleting = false;
+        this.text = '';
+        this.typeSpeed = 100; // Adjust typing speed
+        this.deleteSpeed = 50; // Adjust deleting speed
+        this.delayBetweenWords = 2000; // Adjust delay
+        
+        this.type();
+    }
+
+    type() {
+        const currentWord = this.words[this.currentWordIndex];
+        
+        if (this.isDeleting) {
+            this.text = currentWord.substring(0, this.text.length - 1);
+        } else {
+            this.text = currentWord.substring(0, this.text.length + 1);
+        }
+
+        this.element.textContent = this.text;
+
+        let typeSpeed = this.typeSpeed;
+        
+        if (this.isDeleting) {
+            typeSpeed = this.deleteSpeed;
+        }
+
+        if (!this.isDeleting && this.text === currentWord) {
+            typeSpeed = this.delayBetweenWords;
+            this.isDeleting = true;
+        } else if (this.isDeleting && this.text === '') {
+            this.isDeleting = false;
+            this.currentWordIndex = (this.currentWordIndex + 1) % this.words.length;
+            typeSpeed = 500; // Pause before typing next word
+        }
+
+        setTimeout(() => this.type(), typeSpeed);
+    }
+}
+
+// Initialize text rotator
+document.addEventListener('DOMContentLoaded', () => {
+    const textRotators = document.querySelectorAll('.text-rotate');
+    textRotators.forEach(rotator => new TextRotator(rotator));
+});
+
+//disable right click
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    alert("Right-click is disabled on this page.");
+});
