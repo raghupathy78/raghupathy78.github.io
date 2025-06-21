@@ -164,3 +164,19 @@ window.addEventListener('scroll', function() {
             contactForm.reset();
         });
     }
+
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+  alert('Right-click is disabled');
+});
+
+document.addEventListener('keydown', function(e) {
+  // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+  if (e.key === 'F12' || 
+      (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+      (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+      (e.ctrlKey && e.key === 'U')) {
+    e.preventDefault();
+    alert('Viewing source is disabled');
+  }
+});
