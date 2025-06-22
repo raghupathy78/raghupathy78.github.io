@@ -40,6 +40,24 @@
       gtag('js', new Date());
       gtag('config', 'G-1NK0W8TWMS');
     </script>
+
+    <script>
+// Disable right-click
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+// Disable keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i')) {
+    e.preventDefault();
+    alert('Viewing source is disabled');
+  }
+  if (e.key === 'F12') {
+    e.preventDefault();
+    alert('Developer tools are disabled');
+  }
+});
+</script>
+
 </head>
 <body class="bg-dark text-light">
      <!-- Navigation Bar -->
@@ -67,7 +85,13 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 animate__animated animate__fadeInUp">
                     <h1 class="text-white mb-4 animate__animated animate__bounceInRight">Hi, I'm <span class="text-primary">Ragupathy</span></h1>
-                    <h2 class="fs-4 mb-4">Junior Web Developer<span class="text-rotate" data-rotate='["Web Developer", "UI/UX Designer", "Web design"]'></span></h2>
+                     <h2 class="text-white mb-4 rotating-text">
+                        <span class="word">Junior Web Developer</span>
+                        <span class="word">Frontend Specialist</span>
+                        <span class="word">UX/UI Designer</span>
+                        <span class="word">PHP Intermediate</span>
+                        <span class="word">MYSQL Intermediate</span>
+                    </h2>
                     <p class="text-white-50 mb-4">I build exceptional digital experiences with clean, efficient code.</p>
                     <a href="#projects" class="btn btn-primary btn-lg me-3 animate__animated animate__pulse animate__backInLeft">View My Work</a>
                     <a href="#contact" class="btn btn-outline-light btn-lg animate__animated animate__backInRight">Contact Me</a>
@@ -168,8 +192,8 @@
                 <div class="col-md-6 col-lg-4">
                     <div class="card bg-dark border-0 h-100">
                         <div class="card-body text-light">
-                            <h3 class="h5 card-title">Problem Solving</h3>
-                            <p class="card-text">Strong analytical skills with a focus on problem-solving and debugging.</p>
+                            <h3 class="h5 card-title">PHP</h3>
+                            <p class="card-text">Basic knowledge of PHP for server-side scripting and dynamic web content.</p>
                         </div>
                     </div>
                 </div>

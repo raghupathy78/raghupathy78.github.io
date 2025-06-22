@@ -172,6 +172,11 @@ document.addEventListener('contextmenu', function(e) {
   alert('Right-click is disabled');
 });
 }
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+  alert('Right-click is disabled');
+});
+
 document.addEventListener('keydown', function(e) {
   // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
   if (e.key === 'F12' || 
@@ -237,27 +242,155 @@ class TextRotator {
 }
 
 // Initialize text rotator
-document.addEventListener('DOMContentLoaded', () => {
-    const textRotators = document.querySelectorAll('.text-rotate');
-    textRotators.forEach(rotator => new TextRotator(rotator));
+const textRotatorElements = document.querySelectorAll('.text-rotator');
+textRotatorElements.forEach(element => {
+    new TextRotator(element);
 });
 
-// Prevent the page from being loaded in an iframe
-if (window.top !== window.self) {
-  window.top.location = window.self.location;
+// Dynamic Section Loading
+// This function dynamically loads a section's JavaScript file when needed
+const loadSection = async (section) => {
+  const { init } = await import(`./sections/${section}.js`);
+  init();
+};
+
+// Load sections as needed
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.querySelector('#contact')) {
+    loadSection('contact');
+  }
+});
+
+// Add this to your existing JavaScript
+function initTextAnimation() {
+  const words = ["Junior Web Developer", "Frontend Specialist", "UI Enthusiast", "Code Lover"];
+  let currentIndex = 0;
+  const textElement = document.querySelector('.hero h2');
+  
+  function animateText() {
+    gsap.to(textElement, {
+      duration: 0.5,
+      opacity: 0,
+      y: -20,
+      ease: "power2.out",
+      onComplete: () => {
+        currentIndex = (currentIndex + 1) % words.length;
+        textElement.textContent = words[currentIndex];
+        gsap.to(textElement, {
+          duration: 0.5,
+          opacity: 1,
+          y: 0,
+          ease: "power2.out"
+        });
+      }
+    });
+  }
+  
+  // Change text every 3 seconds
+  setInterval(animateText, 3000);
 }
 
-// Disable right-click
-document.addEventListener('contextmenu', e => e.preventDefault());
+// Call it when DOM is loaded
+document.addEventListener('DOMContentLoaded', initTextAnimation);
 
-// Disable keyboard shortcuts
-document.addEventListener('keydown', e => {
-  if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i')) {
-    e.preventDefault();
-    alert('Viewing source is disabled');
+// In your main.js, add this animation code
+function initAdvancedTextAnimations() {
+  // Profession texts to cycle through
+  const professions = [
+    "Junior Web Developer",
+    "Frontend Specialist",
+    "UI/UX  Designer",
+    "Creative Coder",
+    "Problem Solver",
+    "Mysql Database Intermediate",
+  ];
+  
+  // Animation timeline
+  const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+  
+  // Name animation
+  tl.to(".name-animation", {
+    duration: 0.8,
+    opacity: 1,
+    y: 0,
+    scale: 1.1,
+    color: "#0d6efd",
+  })
+  .to(".name-animation", {
+    duration: 0.5,
+    scale: 1,
+    color: "#ffffff",
+  });
+  
+  // Profession animation
+  let currentProfessionIndex = 0;
+  const professionElement = document.querySelector(".profession-text");
+  
+  function animateProfession() {
+    // Get next profession
+    currentProfessionIndex = (currentProfessionIndex + 1) % professions.length;
+    const nextProfession = professions[currentProfessionIndex];
+    
+    // Create animation timeline for text change
+    const professionTl = gsap.timeline();
+    
+    professionTl.to(professionElement, {
+      duration: 0.3,
+      opacity: 0,
+      y: -20,
+      onComplete: () => {
+        professionElement.textContent = nextProfession;
+      }
+    })
+    .to(professionElement, {
+      duration: 0.4,
+      opacity: 1,
+      y: 0
+    })
+    .to(professionElement, {
+      duration: 0.2,
+      scale: 1.05,
+      yoyo: true,
+      repeat: 1
+    });
+    
+    // Schedule next animation
+    gsap.delayedCall(3, animateProfession);
   }
-  if (e.key === 'F12') {
-    e.preventDefault();
-    alert('Developer tools are disabled');
+  
+  // Initial profession animation
+  tl.to(".profession-text", {
+    duration: 0.8,
+    opacity: 1,
+    y: 0,
+    onComplete: () => {
+      // Start cycling professions after initial animation
+      gsap.delayedCall(2, animateProfession);
+    }
+  });
+  
+  // Add some decorative elements animation
+  tl.from(".hero p", {
+    duration: 0.6,
+    opacity: 0,
+    y: 20,
+    stagger: 0.1
+  }, "-=0.4")
+  .from(".hero .btn", {
+    duration: 0.5,
+    opacity: 0,
+    y: 20,
+    stagger: 0.15,
+    ease: "back.out(1.7)"
+  }, "-=0.3");
+}
+
+// Initialize when DOM is loaded
+document.addEventListener("DOMContentLoaded", () => {
+  // Make sure GSAP and ScrollTrigger are loaded
+  if (typeof gsap !== "undefined") {
+    initAdvancedTextAnimations();
+  } else {
+    console.error("GSAP is not loaded");
   }
 });
