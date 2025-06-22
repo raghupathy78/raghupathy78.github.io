@@ -165,11 +165,13 @@ window.addEventListener('scroll', function() {
         });
     }
 
+    //disable right-click and keyboard shortcuts
+function typeWriter(element, text, i = 0, speed = 50) {
 document.addEventListener('contextmenu', function(e) {
   e.preventDefault();
   alert('Right-click is disabled');
 });
-
+}
 document.addEventListener('keydown', function(e) {
   // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
   if (e.key === 'F12' || 
@@ -240,8 +242,22 @@ document.addEventListener('DOMContentLoaded', () => {
     textRotators.forEach(rotator => new TextRotator(rotator));
 });
 
-//disable right click
-document.addEventListener('contextmenu', function(e) {
+// Prevent the page from being loaded in an iframe
+if (window.top !== window.self) {
+  window.top.location = window.self.location;
+}
+
+// Disable right-click
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+// Disable keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i')) {
     e.preventDefault();
-    alert("Right-click is disabled on this page.");
+    alert('Viewing source is disabled');
+  }
+  if (e.key === 'F12') {
+    e.preventDefault();
+    alert('Developer tools are disabled');
+  }
 });
